@@ -52,7 +52,7 @@ void SerialPortSetup() {
 
   //  text(Serial.list().length,200,200);
 
-  portName= Serial.list()[PortSelected];
+  portName= "/dev/tty.usbmodem1421";
   //  println( Serial.list());
   ArrayOfPorts=Serial.list();
   println(ArrayOfPorts);
