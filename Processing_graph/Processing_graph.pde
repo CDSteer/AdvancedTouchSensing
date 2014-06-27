@@ -7,16 +7,21 @@ float[] gestureFive = null;
 
 float[][] gesturePoints = new float[5][2];
 float[] gestureDist = new float[5];
-String[] names = {"Nothing", "1 Leaf", "2 Leaf", "Soil", "new"};
+String[] names = {"Nothing", "Touch", "Hold", "Squeeze", "Tap"};
+
+float width = 300;
+float height = 300; 
 
 void setup() {
-  size(1000, 1000); 
+  size(1000, 800); 
   MyArduinoGraph.xLabel="Readnumber";
   MyArduinoGraph.yLabel="Amp";
   MyArduinoGraph.Title="Plant Gesture";  
   noLoop();
   PortSelected=1;
   SerialPortSetup(); // speed of 115200 bps etc.
+  
+  
 }
 
 void draw() {
@@ -25,7 +30,7 @@ void draw() {
   if ( DataRecieved3 ) {
     pushMatrix();
     pushStyle();
-    MyArduinoGraph.yMax=1000;      
+    MyArduinoGraph.yMax=1400;      
     MyArduinoGraph.yMin=-200;      
     MyArduinoGraph.xMax=int (max(Time3));
     MyArduinoGraph.DrawAxis();    
@@ -60,7 +65,6 @@ void draw() {
         currentMaxValue = gestureDist[i];
       }
     }
-    
     totalDist=totalDist /3;
 
     for (int i = 0; i < 5;i++){
@@ -70,7 +74,7 @@ void draw() {
          fill(0,0,0);
          text(names[i], 50, 500);
          fill(currentAmmount*255.0f, 0, 0);
-         System.out.println(currentMax);
+         System.out.println(currentMaxValue);
       } else {
         fill(255,255,255);
       }
@@ -81,9 +85,14 @@ void draw() {
       text(names[i],810,100 * (i+1)+25);
       fill(255, 0, 0);
       //rect(800,100* (i+1), max(0,currentAmmount*50),50);
+      float width2 = (currentMaxValue - 1022)*10;
+      float height2 = (currentMaxValue - 1022)*10; 
+      ellipse(450, 600, width2, height2);
+      fill(255,0,0);
     }
   }
 }
+
 
 void stop(){
   myPort.stop();
