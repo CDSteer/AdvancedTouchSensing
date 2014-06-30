@@ -8,7 +8,7 @@ int currentMax = 0;
 float currentMaxValue = -1;
 
 void setup() {
-  size(1000, 800);
+  size(1920, 1080);
   MyArduinoGraph.xLabel="Readnumber";
   MyArduinoGraph.yLabel="Amp";
   MyArduinoGraph.Title="Plant Gesture";
